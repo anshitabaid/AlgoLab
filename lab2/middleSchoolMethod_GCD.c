@@ -15,7 +15,7 @@ int asqrt(int m) {
 
 int primes[] = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101};
 
-int* primeFactors(int a) {
+int* primeFactors(int a, int minimum) {
 
 	int i = 0;
 	int count = 0;
@@ -23,7 +23,7 @@ int* primeFactors(int a) {
 
 	printf("Finding prime factors for %d\n", a);
 
-	while(primes[i] <= a) {
+	while(primes[i] <= minimum) {
 		while(a % primes[i] == 0) {
 			*(primeFactorsArray + count++) = primes[i];
 			a /= primes[i];
@@ -37,8 +37,8 @@ int* primeFactors(int a) {
 
 int gcd(int m, int n) {
 
-	int * primeFactorsOfM = primeFactors(m);
-	int * primeFactorsOfN = primeFactors(n);
+	int * primeFactorsOfM = primeFactors(m, min(m, n));
+	int * primeFactorsOfN = primeFactors(n, min(m, n));
 
 	int * commonPrimes = (int*)malloc((min(m,n))*sizeof(int));
 	int count = 0;
