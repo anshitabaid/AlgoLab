@@ -8,10 +8,6 @@ typedef struct node {
 	struct node *left, *right;
 } Node;
 
-int max(int a, int b) {
-	return (a > b) ? a : b;
-}
-
 Node *newNode(int x) {
 	Node *root = (Node*)malloc(sizeof(Node));
 	root->value = x;
@@ -21,7 +17,7 @@ Node *newNode(int x) {
 
 int count(Node *root) {
 
-	opcount += 1;
+	opcount++;
 
 	if (root == NULL) {
 		return 0;

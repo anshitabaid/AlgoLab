@@ -1,35 +1,59 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include<stdio.h>
+#include<stdlib.h>
 
-// quickSort(arr[], low, high)
-// {
-//     if (low < high)
-//     {
-//         /* pi is partitioning index, arr[pi] is now
-//            at right place */
-//         pi = partition(arr, low, high);
+int opcount = 0;
 
-//         quickSort(arr, low, pi - 1);  // Before pi
-//         quickSort(arr, pi + 1, high); // After pi
-//     }
-// }
+int partition (int arr[], int low, int high) { 
+	int temp;
+    int pivot=low;
+	int i=low;
+	int j=high;
+	printf("pivot is %d\n",arr[pivot]);
+	while(i<j) {
+		while(arr[i]<=arr[pivot]&&i<=high) {
+			opcount++;
+			i++;
+		}
+		while(arr[j]>arr[pivot]&&j>=low) {
+			opcount++;
+			j--;
+		}
+		opcount++;
+		if(i<j)
+		{
+			temp=arr[i];
+			arr[i]=arr[j];
+			arr[j]=temp;
+		}
+	}
+	temp=arr[j];
+	arr[j]=arr[pivot];
+	arr[pivot]=temp;
+	return j;
+} 
 
-// partition (arr[], low, high)
-// {
-//     // pivot (Element to be placed at right position)
-//     pivot = arr[high];  
- 
-//     i = (low - 1)  // Index of smaller element
+void quickSort(int arr[], int low, int high) 
+{ 
+    if (low < high) 
+    { 
+        int pi = partition(arr, low, high); 
+        quickSort(arr, low, pi - 1); 
+        quickSort(arr, pi + 1, high); 
+    } 
+} 
 
-//     for (j = low; j <= high- 1; j++)
-//     {
-//         // If current element is smaller than the pivot
-//         if (arr[j] < pivot)
-//         {
-//             i++;    // increment index of smaller element
-//             swap arr[i] and arr[j]
-//         }
-//     }
-//     swap arr[i + 1] and arr[high])
-//     return (i + 1)
-// }
+int main() {
+	int arr[50];
+	int i,n;
+	printf("Enter the number of elements\n");
+	scanf("%d",&n);
+	printf("Enter the array elements\n");
+	for(i=0;i<n;i++)
+		scanf("%d",&arr[i]);
+	quickSort(arr,0,n-1);
+	printf("After quick sort\n");
+	for(i=0;i<n;i++)
+		printf("%d\t",arr[i]);
+	printf("\nOP count: %d", opcount);
+	printf("\n");
+}
