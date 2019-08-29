@@ -43,7 +43,7 @@ int diameter(Node *root) {
 
 }
 
-void main() {
+int main() {
 
 	// sample input
 	Node *root = newNode(1);
