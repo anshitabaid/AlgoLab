@@ -10,15 +10,13 @@ int partition (int arr[], int low, int high) {
 	int j=high;
 	printf("pivot is %d\n",arr[pivot]);
 	while(i<j) {
+		opcount++;
 		while(arr[i]<=arr[pivot]&&i<=high) {
-			opcount++;
 			i++;
 		}
 		while(arr[j]>arr[pivot]&&j>=low) {
-			opcount++;
 			j--;
 		}
-		opcount++;
 		if(i<j)
 		{
 			temp=arr[i];
